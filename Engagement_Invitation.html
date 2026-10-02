@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshith & Sneha's Engagement</title>
+    
+    <!-- Elegant Fonts: Playfair Display (Serif), Great Vibes (Script), Montserrat (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        peacock: {
+                            deep: '#030b14',    /* Very dark navy/black base */
+                            navy: '#05182d',    /* Deep rich blue */
+                            teal: '#004354',    /* Medium peacock blue */
+                            emerald: '#0a5c50', /* Vibrant emerald green */
+                        },
+                        silver: {
+                            light: '#f5f7fa',
+                            base: '#c0c0c0',
+                            dark: '#8b9bb4',
+                            accent: '#e2e8f0'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                        script: ['"Great Vibes"', 'cursive'],
+                    },
+                    boxShadow: {
+                        'silver-glow': '0 0 30px rgba(192, 192, 192, 0.2)',
+                        'silver-glow-lg': '0 0 50px rgba(192, 192, 192, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Elegant Silver Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030b14; }
+        ::-webkit-scrollbar-thumb { background: #8b9bb4; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c0c0c0; }
+
+        /* Complex Gradient Mesh Background for Peacock Colors */
+        .mesh-bg {
+            background-color: #030b14;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 67, 84, 0.6) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(10, 92, 80, 0.5) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(5, 24, 45, 0.8) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(0, 67, 84, 0.5) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Subtle Pattern Overlay to prevent plain look */
+        .pattern-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c0c0c0' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Silver Text Gradient */
+        .text-silver-gradient {
+            background: linear-gradient(to right, #a0aec0 0%, #ffffff 50%, #a0aec0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        /* Silver Border Gradient for Cards and Images */
+        .border-silver-gradient {
+            position: relative;
+            background: #030b14;
+            background-clip: padding-box;
+            border: 2px solid transparent;
+        }
+        .border-silver-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #a0aec0, #ffffff, #718096);
+        }
+
+        /* Delicate Silver Divider */
+        .silver-divider {
+            width: 100%;
+            height: 30px;
+            background-image: radial-gradient(circle at center, #c0c0c0 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: center;
+            opacity: 0.5;
+        }
+
+        /* Staggered Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Floating Animation for Visual Interest */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        /* Image Masking for Elegance */
+        .img-mask-arch {
+            border-radius: 10rem 10rem 0.5rem 0.5rem;
+        }
+    </style>
+</head>
+<body class="mesh-bg text-silver-light font-sans antialiased overflow-x-hidden selection:bg-silver-base selection:text-peacock-deep relative">
+
+    <!-- Pattern Overlay for entire page -->
+    <div class="fixed inset-0 z-0 pattern-overlay"></div>
+
+    <!-- Hero / Welcome Section -->
+    <header class="relative min-h-[100svh] flex flex-col items-center justify-center pt-16 pb-12 px-6 z-10">
+        
+        <div class="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center text-center">
+            
+            <p class="font-sans text-silver-base tracking-[0.3em] uppercase text-xs md:text-sm mb-6 reveal">
+                Join us as we begin forever
+            </p>
+            
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl mb-2 text-silver-gradient leading-tight reveal drop-shadow-2xl" style="transition-delay: 0.1s;">
+                Harshith
+            </h1>
+            <span class="font-script text-5xl md:text-7xl text-silver-light mb-2 reveal" style="transition-delay: 0.2s;">
+                &amp;
+            </span>
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl mb-12 text-silver-gradient leading-tight reveal drop-shadow-2xl" style="transition-delay: 0.3s;">
+                Sneha
+            </h1>
+
+            <!-- Couple Selfie Image -->
+            <div class="reveal relative w-60 h-60 md:w-80 md:h-80 mb-12 rounded-full p-1.5 border-silver-gradient shadow-silver-glow animate-float" style="transition-delay: 0.4s;">
+                <!-- Decorative rotating ring -->
+                <div class="absolute inset-[-10px] rounded-full border border-silver-base/30 border-dashed animate-[spin_20s_linear_infinite]"></div>
+                
+                <img src="image_2.png" alt="Harshith and Sneha" class="w-full h-full object-cover rounded-full shadow-inner" onerror="this.src='https://placehold.co/500x500/004354/f5f7fa?text=Harshith+%26+Sneha'">
+            </div>
+
+            <p class="font-serif text-xl md:text-2xl text-silver-light italic mb-16 max-w-2xl reveal px-4 leading-relaxed font-light" style="transition-delay: 0.5s;">
+                "Two souls with but a single thought, two hearts that beat as one."
+            </p>
+
+            <!-- Scroll Down Indicator -->
+            <a href="#invitation" class="reveal flex flex-col items-center text-silver-base hover:text-white transition-colors duration-300" style="transition-delay: 0.6s;">
+                <span class="text-xs tracking-widest uppercase mb-3 font-semibold">Discover More</span>
+                <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Section Divider -->
+    <div class="relative z-10 w-full max-w-2xl mx-auto flex items-center justify-center py-8">
+        <div class="h-px bg-gradient-to-r from-transparent via-silver-base to-transparent flex-grow"></div>
+        <div class="mx-4 font-script text-3xl text-silver-base">✧</div>
+        <div class="h-px bg-gradient-to-r from-transparent via-silver-base to-transparent flex-grow"></div>
+    </div>
+
+    <!-- The Formal Invitation Section -->
+    <section id="invitation" class="py-20 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+            
+            <!-- Hands Holding Image -->
+            <div class="w-full lg:w-1/2 flex justify-center reveal-left">
+                <div class="relative w-full max-w-md">
+                    <!-- Layered decorative background -->
+                    <div class="absolute inset-0 border-2 border-silver-base/30 img-mask-arch translate-x-4 translate-y-4 rounded-b-xl"></div>
+                    
+                    <img src="image.png" alt="Holding Hands" class="relative z-10 w-full h-auto img-mask-arch rounded-b-xl shadow-silver-glow p-1 bg-gradient-to-b from-silver-light to-silver-dark" onerror="this.src='https://placehold.co/500x700/0a5c50/f5f7fa?text=Our+Journey'">
+                    
+                    <!-- Decorative silver sparkles -->
+                    <div class="absolute -bottom-6 -left-6 text-silver-base text-4xl z-20 animate-pulse">✦</div>
+                    <div class="absolute top-1/2 -right-8 text-silver-base text-2xl z-20 animate-pulse" style="animation-delay: 1s;">✧</div>
+                </div>
+            </div>
+
+            <!-- Warm Romantic Invitation Text -->
+            <div class="w-full lg:w-1/2 text-center lg:text-left reveal-right">
+                <h2 class="font-serif text-4xl md:text-5xl text-silver-gradient mb-6">Our Next Chapter</h2>
+                <div class="w-24 h-px bg-silver-base mb-8 mx-auto lg:mx-0"></div>
+                
+                <p class="font-serif text-2xl md:text-3xl leading-relaxed text-silver-light mb-8 italic">
+                    "With immense joy and hearts full of love, together with our families, we invite you to witness our exchange of rings and promises."
+                </p>
+                
+                <p class="font-sans text-base md:text-lg text-silver-dark leading-loose">
+                    Your love, presence, and blessings are what will make our day truly magical. We cannot wait to celebrate this beautiful milestone surrounded by the people who mean the world to us.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="relative z-10 w-full max-w-2xl mx-auto flex items-center justify-center py-12">
+        <div class="silver-divider"></div>
+    </div>
+
+    <!-- Event Details Section -->
+    <section class="py-16 px-6 relative z-10">
+        
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="font-serif text-4xl md:text-5xl text-silver-gradient mb-16 reveal">The Celebration</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                
+                <!-- Date & Time Card -->
+                <div class="border border-white/60 rounded-xl p-10 bg-white/80 backdrop-blur-md shadow-silver-glow transform hover:-translate-y-2 transition-transform duration-500 reveal-left">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-black/5 text-black border border-black/20">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="font-sans text-black tracking-[0.2em] uppercase text-sm font-bold mb-4">When</h3>
+                    <p class="font-serif text-3xl md:text-4xl text-black mb-2 font-medium">22 October</p>
+                    <p class="font-sans text-xl text-black font-semibold">10:30 AM</p>
+                </div>
+
+                <!-- Venue Card -->
+                <div class="border border-white/60 rounded-xl p-10 bg-white/80 backdrop-blur-md shadow-silver-glow transform hover:-translate-y-2 transition-transform duration-500 reveal-right">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-black/5 text-black border border-black/20">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="font-sans text-black tracking-[0.2em] uppercase text-sm font-bold mb-4">Where</h3>
+                    <p class="font-serif text-2xl md:text-3xl text-black mb-3 font-medium">Navyashree Hall</p>
+                    <p class="font-sans text-base text-black leading-relaxed font-semibold">
+                        100 feet road, Basavanagudi<br>
+                        Shivamogga
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Call to Actions -->
+            <div class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 reveal">
+                <!-- Google Maps Directions Link -->
+                <a href="https://www.google.com/maps/search/?api=1&query=Navyashree+hall,+100+feet+road,+basavanagudi,+Shivamogga" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 w-full sm:w-auto bg-gradient-to-r from-silver-dark to-silver-light text-peacock-deep font-bold tracking-widest uppercase text-sm rounded-sm shadow-silver-glow hover:opacity-90 transition-opacity duration-300">
+                    <span class="flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                        Get Directions
+                    </span>
+                </a>
+                
+                <!-- Interactive Blessing Button -->
+                <button id="blessingBtn" class="px-8 py-4 w-full sm:w-auto border border-silver-base text-silver-light font-bold tracking-widest uppercase text-sm rounded-sm hover:bg-silver-base/20 transition-all duration-300">
+                    Send Blessings
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-14 text-center relative z-10 overflow-hidden mt-10">
+        <div class="absolute inset-0 bg-gradient-to-t from-peacock-deep to-transparent"></div>
+        <div class="relative z-10">
+            <div class="font-script text-silver-base text-4xl mb-4 opacity-80">✧</div>
+            <p class="font-serif text-silver-gradient text-xl md:text-2xl italic mb-6 px-4">We are excited to share this joyous day with you!</p>
+            <div class="w-16 h-px bg-silver-dark mx-auto mb-6"></div>
+            <p class="font-sans text-xs text-silver-dark uppercase tracking-[0.4em]">Harshith & Sneha</p>
+        </div>
+    </footer>
+
+    <!-- Background Music Player (Fixed Bottom Right) -->
+    <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-peacock-deep/80 backdrop-blur-md p-2 pl-4 rounded-full border border-silver-base/30 shadow-silver-glow">
+        <span class="text-xs font-sans text-silver-base tracking-widest uppercase hidden sm:block" id="audioLabel">Play Music</span>
+        <button id="audioToggleBtn" class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-silver-light to-silver-dark text-peacock-deep rounded-full hover:scale-105 transition-transform shadow-md">
+            <!-- Play Icon -->
+            <svg id="playIcon" class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <!-- Pause Icon (Hidden initially) -->
+            <svg id="pauseIcon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <!-- Royalty-free classical piano snippet (Canon in D) -->
+        <audio id="bgMusic" loop>
+            <source src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Kevin_MacLeod_-_Canon_in_D_Major.ogg" type="audio/ogg">
+        </audio>
+    </div>
+
+    <!-- Scripts for Interactivity and Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Scroll Reveal Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            revealElements.forEach(el => observer.observe(el));
+            
+            // Trigger immediately for elements already in view
+            setTimeout(() => {
+                revealElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if(rect.top < window.innerHeight) {
+                        el.classList.add('active');
+                    }
+                });
+            }, 100);
+
+            // 2. Blessing Button Logic (Custom UI Feedback)
+            const blessingBtn = document.getElementById('blessingBtn');
+            if(blessingBtn) {
+                blessingBtn.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = "Thank You! ✧";
+                    this.classList.add('bg-silver-base', 'text-peacock-deep');
+                    this.classList.remove('text-silver-light');
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.classList.remove('bg-silver-base', 'text-peacock-deep');
+                        this.classList.add('text-silver-light');
+                    }, 3000);
+                });
+            }
+
+            // 3. Background Music Toggle Logic
+            const audio = document.getElementById('bgMusic');
+            const audioToggleBtn = document.getElementById('audioToggleBtn');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const audioLabel = document.getElementById('audioLabel');
+            let isPlaying = false;
+
+            audioToggleBtn.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                    audioLabel.innerText = "Play Music";
+                } else {
+                    audio.volume = 0.4; // Soft background volume
+                    audio.play().catch(e => console.log("Audio play blocked by browser."));
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                    audioLabel.innerText = "Playing...";
+                }
+                isPlaying = !isPlaying;
+            });
+        });
+    </script>
+</body>
+</html>
